@@ -1,0 +1,3 @@
+iFinance Sergey Sherstnev
+
+Пример простого SPA. Хорошая ToDo связка node.js, mongodb(mongoose), angular2, jade, jQuery, babel, webpack, bootstrap(bootpag) и chart.js для вывода графика. Написано на ES6, который babel перегоняет в ES5 для поддержки старых браузеров.  Все модули перечислены в package.json для авто установки. Порядок запуска: сначала команда babel:w затем webpack:w и потом старт (файл для запуска должен стоять в настройках проекта \ifinance\lib\app.js). Node была 5.5.0 версии. IDE NetBeans 8.2 RC (8.1 не понимает ES6, соответственно авто формат не работает).

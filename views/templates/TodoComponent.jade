@@ -1,0 +1,127 @@
+.container
+  .jumbotron.text-center.jumbotronLogo
+      table(cellpadding="0", cellspacing="0", border="0", align="center")
+        tr(valign="top")
+            td
+                .iLogo
+                    span.label.labelLogo i
+            td
+                .iText  Finance
+  .row
+    .col-sm-12.col-sm-offset-0
+      table.table.table-responsive.table-bordered.table-condensed(name='myTable', id='myTable')
+        thead
+          tr
+            th.text-left №
+            th.text-center дата
+              | &nbsp;&nbsp;
+              input(type='checkbox' id='check_date' on-click='sortGrid("date")' bind-checked="true")
+            th.text-center приход
+              | &nbsp;&nbsp;
+              input(type='checkbox' id='check_income' on-click='sortGrid("income")' bind-checked="false")
+            th.text-center расход
+              | &nbsp;&nbsp;
+              input(type='checkbox' id='check_outcome' on-click='sortGrid("outcome")' bind-checked="false")
+            th.text-center прибыль
+              | &nbsp;&nbsp;
+              input(type='checkbox' id='check_profit' on-click='sortGrid("profit")' bind-checked="false")
+        tbody
+          tr(*ngFor="var todo of todos_page;var index = index")
+            td.text-left
+              //input(type='checkbox' on-click='deleteTodo(todo._id)' bind-checked="false")
+              //| &nbsp;&nbsp;
+              | {{(index + 1) + ((page - 1) * 15)}}
+            td.text-center
+              | {{todo.date}}
+            td.text-right
+              | {{todo.income}}
+            td.text-right
+              | {{todo.outcome}}
+            td.text-right
+              | {{todo.profit}}
+        tfoot
+          tr
+            td.text-right
+            td.text-right
+              | Итого:
+            td.text-right
+              | {{getTotal('income', todos)}}
+            td.text-right
+              | {{getTotal('outcome', todos)}}
+            td.text-right
+              | {{getTotal('profit', todos)}}
+  
+  .row
+    .col-sm-12.col-sm-offset-0
+      table(cellpadding="0", cellspacing="0", padding="0", margin="50", border="0", align="center", width="100%")
+        tr(valign="top")
+          td(align="left")
+            nav(aria-label='Page navigation')
+              ul.pagination
+                button.btn.btn-success(on-click='showNew()') Новая операция
+          td
+          td(align="right")
+              #page-selection
+  
+  h3
+    br
+
+  canvas#myChart(height='150')
+  
+  h1
+    br
+
+  #myModal.modal.fade(role='dialog', ng-model="myModal")
+        .modal-dialog
+         form(on-ngSubmit='createTodo()')
+          .modal-content.ModalColor1
+            .modal-header
+              button.close(type='button', data-dismiss='modal') &times;
+              table(cellpadding="0", cellspacing="0", border="0", align="center")
+                tr(valign="center")
+                  td
+                    .iTextNew &nbsp;Новая операция
+            |         
+            .modal-body.ModalColor2
+                .row
+                  .col-sm-8.col-sm-offset-2
+                    
+                      .form-group
+                        br
+                        h4 Введите дату перевода
+                        .input-group.date
+                          input.form-control.input-lg.text-center(type='date' id='datePicker' bindon-ngModel='todoData.date', required)
+                          span.input-group-addon
+                            span.glyphicon.glyphicon-calendar
+                        p
+                        h4 Введите сумму перевода
+                        .input-group
+                          input.form-control.input-lg.text-center(type='number' min='1' value='1' step='0.01'  placeholder='100,00' bindon-ngModel='todoData.price', required)
+                          span.input-group-addon
+                            span.glyphicon.glyphicon-ruble
+                        p
+                        h4 Введите комиссию на прибыль
+                        .input-group
+                          input.form-control.input-lg.text-center(type='number' min='0' max='100' value='1' step='0.1' placeholder='0,1' bindon-ngModel='todoData.persent', required)
+                          span.input-group-addon
+                            .PersText %
+                        p
+                        h4 Выберите вид операции и сохраните
+                        .row
+                            .col-sm-12.col-sm-offset-0
+                                table(cellpadding="0", cellspacing="0", padding="0", margin="0", border="0", align="center", width="100%")
+                                    tr(valign="top")
+                                        td(align="left")
+                                            .btn-group(data-toggle='buttons')
+                                                label.btn.btn-primary.active(on-click="todoData.come='in'")
+                                                    input(type='radio' name='option1', autocomplete='off', value='in')
+                                                    |  Приход
+                                                label.btn.btn-primary(on-click="todoData.come='out'")
+                                                    input(type='radio', name='option2', autocomplete='off', value='out')
+                                                    |  Расход
+                                        td(align="right")
+                                            button.btn.btn-success.hidden(type='submit') Добавить
+              .modal-footer
+                p
+                  button.btn.btn-success.btn-lg(type='submit') Добавить
+                  button.btn.btn-default.btn-lg(type='button', data-dismiss='modal') Закрыть
