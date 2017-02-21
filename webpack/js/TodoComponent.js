@@ -74,7 +74,7 @@ class TodoComponent {
 
         var now = new Date();
 
-        for (var it = 0; it < 12; it++)
+        for (var it = 1; it <= 12; it++)
         {
             this.todos.forEach((item, i, todos) => {
                 if ((item.date).substr(0, 4) == now.getFullYear())
@@ -86,9 +86,9 @@ class TodoComponent {
                     }
                     if ((item.date).substr(5, 2) == mounth)
                     {
-                        this.chartData.datasets[0].data[it] += Number(item.profit);
-                        this.chartData.datasets[1].data[it] += Number(item.income);
-                        this.chartData.datasets[2].data[it] += Number(item.outcome);
+                        this.chartData.datasets[0].data[it-1] += Number(item.profit)|0;
+                        this.chartData.datasets[1].data[it-1] += Number(item.income)|0;
+                        this.chartData.datasets[2].data[it-1] += Number(item.outcome)|0;
                     }
                 }
             }, this);
@@ -284,7 +284,7 @@ class TodoComponent {
         this.todoService.deleteTodo(id)
                 .subscribe((res) => {
                     this.todos = res;
-                })
+                });
     }
     showNew()
     {
@@ -307,7 +307,7 @@ TodoComponent.annotations = [
         selector: 'todo-app',
         providers: [TodoService, HTTP_PROVIDERS],
         templateUrl: 'templates/TodoComponent'
-    }),
+    })
 ];
 
 TodoComponent.parameters = [[TodoService]];

@@ -9769,7 +9769,7 @@
 	    }
 	  }
 	}
-	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(!(function webpackMissingModule() { var e = new Error("Cannot find module \"C:\\Users\\Сергей\\Desktop\\ifinance\\node_modules\\process\\browser.js\""); e.code = 'MODULE_NOT_FOUND'; throw e; }()))))
+	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(!(function webpackMissingModule() { var e = new Error("Cannot find module \"C:\\Users\\Сергей\\iFinance\\node_modules\\process\\browser.js\""); e.code = 'MODULE_NOT_FOUND'; throw e; }()))))
 
 /***/ },
 /* 3 */
@@ -45666,7 +45666,7 @@
 
 	            var now = new Date();
 
-	            for (var it = 0; it < 12; it++) {
+	            for (var it = 1; it <= 12; it++) {
 	                this.todos.forEach(function (item, i, todos) {
 	                    if (item.date.substr(0, 4) == now.getFullYear()) {
 	                        var mounth = it;
@@ -45674,9 +45674,9 @@
 	                            mounth = '0' + mounth;
 	                        }
 	                        if (item.date.substr(5, 2) == mounth) {
-	                            _this2.chartData.datasets[0].data[it] += Number(item.profit);
-	                            _this2.chartData.datasets[1].data[it] += Number(item.income);
-	                            _this2.chartData.datasets[2].data[it] += Number(item.outcome);
+	                            _this2.chartData.datasets[0].data[it - 1] += Number(item.profit) | 0;
+	                            _this2.chartData.datasets[1].data[it - 1] += Number(item.income) | 0;
+	                            _this2.chartData.datasets[2].data[it - 1] += Number(item.outcome) | 0;
 	                        }
 	                    }
 	                }, this);
