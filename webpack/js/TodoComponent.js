@@ -65,7 +65,9 @@ class TodoComponent {
                         day = "0" + day;
                     }
                     var today = now.getFullYear() + '-' + month + '-' + day;
-                    $('#datePicker').val(today);
+                    this.todoData.date = today;
+                    document.getElementById('datePicker').value = today;
+                    //$('#datePicker').val(today);
 
                 });
     }
@@ -94,7 +96,8 @@ class TodoComponent {
             }, this);
         }
 
-        this.myChart = new Chart($("#myChart")[0].getContext('2d'), {
+        //this.myChart = new Chart($("#myChart")[0].getContext('2d'), {
+        this.myChart = new Chart(document.getElementById('myChart').getContext('2d'), {
             type: 'line',
             data: this.chartData,
             options: {
@@ -164,6 +167,7 @@ class TodoComponent {
         }
 
         var that = this;
+
         $('#page-selection').bootpag({
             total: total,
             page: 1,
@@ -201,14 +205,16 @@ class TodoComponent {
         var arrSort = this.todos;
         this.todos = [];
 
-        this.todos = this.sort_rarity(arrSort, type, $('#check_' + type)[0].checked);
+        this.todos = this.sort_rarity(arrSort, type, document.getElementById('check_' + type).checked);
+        //this.todos = this.sort_rarity(arrSort, type, $('#check_' + type)[0].checked);
 
         var arrCh = ['date', 'income', 'outcome', 'profit'];
 
         arrCh.forEach((item, index, arrCh) => {
             if (item != type)
             {
-                $('#check_' + item)[0].checked = false;
+                document.getElementById('check_' + item).checked = false;
+                //$('#check_' + item)[0].checked = false;
             }
         });
 
@@ -286,10 +292,12 @@ class TodoComponent {
                     this.todos = res;
                 });
     }
+    /*
     showNew()
     {
         $('#myModal').modal('show');
     }
+    */
     getTotal(param, todos)
     {
         var sum = 0;

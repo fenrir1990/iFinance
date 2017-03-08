@@ -58,7 +58,8 @@
           td(align="left")
             nav(aria-label='Page navigation')
               ul.pagination
-                button.btn.btn-success(on-click='showNew()') Новая операция
+                button.btn.btn-success(type='button', data-toggle='modal', data-target='#myModal') Новая операция
+                //button.btn.btn-success(on-click='showNew()') Новая операция
           td
           td(align="right")
               #page-selection
